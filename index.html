@@ -196,6 +196,7 @@
   QRCode.toCanvas(canvas, qrText, function (error) {
     if (error) console.error(error);
   });
+}
 });
     }
 
@@ -213,17 +214,11 @@
     document.getElementById("ytResult").innerText = "Invalid YouTube URL";
     return;
   }
+
   if (videoId) {
     document.getElementById("ytResult").innerHTML =
       `<img src='https://img.youtube.com/vi/${videoId}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
   } else {
     document.getElementById("ytResult").innerText = "Invalid YouTube URL";
   }
-}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
-      } else {
-        document.getElementById("ytResult").innerText = "Invalid YouTube URL";
-      }
-    }
-  </script>
-</body>
-</html>
+}
