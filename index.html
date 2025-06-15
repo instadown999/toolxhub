@@ -1,269 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Generate fancy text, view Instagram DP, and create strong passwords all in one tool site. Free, fast, and mobile-friendly.">
-  <meta name="keywords" content="Fancy Text Generator, Stylish Name Maker, Instagram DP Viewer, Insta Profile Picture Downloader, Password Generator Online">
-  <meta name="author" content="ToolX Hub">
-  <meta property="og:title" content="ToolX Hub - Fancy Text, Insta DP Viewer, Password Generator">
-  <meta property="og:description" content="Convert normal text into stylish fonts, download Instagram profile pictures in HD, and create secure passwords instantly!">
-  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9445/9445126.png">
-  <meta property="og:type" content="website">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/9445/9445126.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="All-in-one tool site: Fancy Text Generator, Instagram DP Viewer, Password Generator, QR Code Generator, and YouTube Thumbnail Downloader.">
+  <title>ToolX Hub - All-in-One Tool Website</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/9445/9445126.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <title>ToolX Hub - Fancy Text, Insta DP Viewer, Password Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #f9fafb, #dbeafe);
       color: #111827;
-      transition: background 0.3s, color 0.3s;
-    }
-    body.dark {
-      background: linear-gradient(to right, #1e1e2f, #2c2c3d);
-      color: #f3f4f6;
     }
     header {
-      background: #0f172a;
       text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
+      padding: 2rem;
+      background-color: #0f172a;
     }
     header img {
       width: 80px;
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
     header h1 {
-      font-size: 2.6rem;
       color: #38bdf8;
-      margin: 0.5rem 0 0.2rem;
-      font-weight: 700;
+      margin: 0.5rem 0 0;
     }
     header p {
-      font-size: 1.1rem;
       color: #e2e8f0;
-      font-weight: 400;
-    }
-    .toggle-theme {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #38bdf8;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      color: #0f172a;
-      font-weight: bold;
-      cursor: pointer;
+      margin-top: 0.5rem;
     }
     nav {
-      background: #2563eb;
       text-align: center;
+      background: #2563eb;
       padding: 0.5rem;
     }
     nav a {
-      margin: 0 10px;
-      color: white;
-      font-weight: 500;
+      color: #fff;
+      margin: 0 1rem;
       text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
+      font-weight: 500;
     }
     .section {
-      max-width: 720px;
-      background: #ffffff;
-      padding: 2rem;
+      max-width: 700px;
+      background: white;
       margin: 2rem auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    body.dark .section {
-      background: #2c2c3d;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .section h2 {
       color: #1e40af;
     }
     input[type="text"], input[type="number"] {
       width: 100%;
-      padding: 0.75rem;
-      margin-top: 10px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
+      padding: 0.7rem;
       font-size: 1rem;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
     button {
       margin-top: 10px;
       padding: 10px 20px;
       font-size: 1rem;
-      background: #3b82f6;
+      background: #2563eb;
+      color: white;
       border: none;
       border-radius: 6px;
-      color: white;
-      font-weight: 600;
       cursor: pointer;
     }
-    button:hover {
-      background: #1d4ed8;
-    }
-    .output {
+    .output, #qrcode {
       margin-top: 15px;
-      padding: 10px;
-      background: #f1f5f9;
-      border-radius: 6px;
       text-align: center;
-      word-wrap: break-word;
+      word-break: break-word;
     }
-    body.dark .output {
-      background: #3c3c4e;
+    .social-share {
+      text-align: center;
+      margin-top: 2rem;
     }
-    .copy-btn {
-      background: #10b981;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      margin-top: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 20px;
-      background: #1d4ed8;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: none;
-    }
-    .share-icons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-    .share-icons a {
-      text-decoration: none;
-      font-size: 1.4rem;
-      padding: 10px;
-      border-radius: 50%;
-      background: #e0f2fe;
-      color: #0ea5e9;
-      transition: transform 0.3s;
-    }
-    .share-icons a:hover {
-      transform: scale(1.1);
+    .social-share a img {
+      width: 40px;
+      margin: 0 10px;
     }
     footer {
       text-align: center;
+      padding: 1rem;
       background: #0f172a;
       color: #cbd5e1;
-      padding: 1rem;
-      margin-top: 4rem;
     }
   </style>
 </head>
 <body>
-<header>
-  <img src="https://cdn-icons-png.flaticon.com/512/9445/9445126.png" alt="ToolX Logo">
-  <h1>ToolX Hub</h1>
-  <p>Free Online Tools: Fancy Text, Insta DP Viewer, Password Generator</p>
-  <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
-</header>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/9445/9445126.png" alt="Logo">
+    <h1>ToolX Hub</h1>
+    <p>All-in-One Online Tools in One Place</p>
+  </header>
 
-<nav>
-  <a href="#fancy-text-generator">Fancy Text</a>
-  <a href="#instagram-dp-viewer">Insta DP</a>
-  <a href="#password-generator">Password</a>
-</nav>
+  <nav>
+    <a href="#fancy">Fancy Text</a>
+    <a href="#dp">Insta DP</a>
+    <a href="#pass">Password</a>
+    <a href="#qr">QR Code</a>
+    <a href="#yt">YouTube Thumbnail</a>
+  </nav>
 
-<section class="section" id="fancy-text-generator">
-  <h2>📝 Fancy Text Generator</h2>
-  <input type="text" id="fancyInput" placeholder="Enter your text...">
-  <button onclick="generateFancyText()">Generate</button>
-  <div id="fancyOutput" class="output"></div>
-  <button class="copy-btn" onclick="copyOutput('fancyOutput')">📋 Copy Fancy Text</button>
-</section>
+  <section class="section" id="fancy">
+    <h2>📝 Fancy Text Generator</h2>
+    <input type="text" id="fancyInput" placeholder="Enter your text">
+    <button onclick="generateFancy()">Generate</button>
+    <div class="output" id="fancyResult"></div>
+  </section>
 
-<section class="section" id="instagram-dp-viewer">
-  <h2>📸 Instagram DP Viewer</h2>
-  <input type="text" id="instaUser" placeholder="Enter Instagram username">
-  <button onclick="viewInstaDP()">View DP</button>
-  <div id="instaDPResult" class="output"></div>
-</section>
+  <section class="section" id="dp">
+    <h2>📸 Instagram DP Viewer</h2>
+    <input type="text" id="dpInput" placeholder="Enter Instagram username">
+    <button onclick="viewDP()">View DP</button>
+    <div class="output" id="dpResult"></div>
+  </section>
 
-<section class="section" id="password-generator">
-  <h2>🔐 Password Generator</h2>
-  <input type="number" id="passLength" placeholder="Enter length (e.g. 12)">
-  <button onclick="generatePassword()">Generate Password</button>
-  <div id="passResult" class="output"></div>
-  <button class="copy-btn" onclick="copyOutput('passResult')">📋 Copy Password</button>
-</section>
+  <section class="section" id="pass">
+    <h2>🔐 Password Generator</h2>
+    <input type="number" id="passLength" placeholder="Password length">
+    <button onclick="genPass()">Generate Password</button>
+    <div class="output" id="passResult"></div>
+  </section>
 
-<div class="share-icons">
-  <a href="https://wa.me/?text=Check%20this%20cool%20tool%20site:%20https://instadown999.github.io/toolxhub/" target="_blank" title="Share on WhatsApp">🟢</a>
-  <a href="https://www.instagram.com/" target="_blank" title="Instagram">📸</a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://instadown999.github.io/toolxhub/" target="_blank" title="Share on Facebook">🔵</a>
-  <a href="https://t.me/share/url?url=https://instadown999.github.io/toolxhub/&text=Free%20Online%20Tools" target="_blank" title="Share on Telegram">✈️</a>
-</div>
+  <section class="section" id="qr">
+    <h2>🔳 QR Code Generator</h2>
+    <input type="text" id="qrInput" placeholder="Enter URL or text">
+    <button onclick="generateQR()">Generate QR</button>
+    <div id="qrcode"></div>
+  </section>
 
-<button class="back-to-top" onclick="scrollToTop()">⬆️</button>
+  <section class="section" id="yt">
+    <h2>📺 YouTube Thumbnail Downloader</h2>
+    <input type="text" id="ytInput" placeholder="Enter YouTube video URL">
+    <button onclick="getYTThumb()">Get Thumbnail</button>
+    <div class="output" id="ytResult"></div>
+  </section>
 
-<footer>
-  <p>&copy; 2025 ToolX Hub. All rights reserved. Designed for creators and developers.</p>
-</footer>
+  <div class="social-share">
+    <a href="https://wa.me/?text=https://instadown999.github.io/toolxhub/" target="_blank" title="Share on WhatsApp">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://instadown999.github.io/toolxhub/" target="_blank" title="Share on Facebook">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+    </a>
+    <a href="https://t.me/share/url?url=https://instadown999.github.io/toolxhub/" target="_blank" title="Telegram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+    </a>
+  </div>
 
-<script>
-  function generateFancyText() {
-    const text = document.getElementById('fancyInput').value;
-    const fancy = text.split('').map(char => {
-      const code = char.charCodeAt(0);
-      return (code >= 65 && code <= 90) ? String.fromCharCode(code + 119951 - 65) :
-             (code >= 97 && code <= 122) ? String.fromCharCode(code + 119919 - 97) : char;
-    }).join('');
-    document.getElementById('fancyOutput').innerText = fancy || '🔎 Please enter text';
-  }
+  <footer>
+    <p>&copy; 2025 ToolX Hub. All rights reserved.</p>
+  </footer>
 
-  function viewInstaDP() {
-    const user = document.getElementById('instaUser').value.trim();
-    if (user) {
-      document.getElementById('instaDPResult').innerHTML = `Try this link: <a href="https://www.instadp.io/fullsize/${user}" target="_blank">View Profile Picture in HD</a>`;
-    } else {
-      document.getElementById('instaDPResult').innerText = '❌ Please enter a username';
+  <script>
+    function generateFancy() {
+      const text = document.getElementById("fancyInput").value;
+      const styled = [...text].map(c => {
+        const code = c.charCodeAt(0);
+        return (code >= 97 && code <= 122) ? String.fromCharCode(code + 119951 - 97) : c;
+      }).join("");
+      document.getElementById("fancyResult").innerText = styled;
     }
-  }
 
-  function generatePassword() {
-    const length = parseInt(document.getElementById('passLength').value);
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    function viewDP() {
+      const user = document.getElementById("dpInput").value.trim();
+      if (user) {
+        const url = `https://www.instadp.io/fullsize/${user}`;
+        document.getElementById("dpResult").innerHTML = `<a href='${url}' target='_blank'>View DP in HD</a>`;
+      }
     }
-    document.getElementById('passResult').innerText = password || '❌ Enter a valid length';
-  }
 
-  function copyOutput(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert('✅ Copied to clipboard!'));
-  }
+    function genPass() {
+      const len = +document.getElementById("passLength").value;
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+      let pass = "";
+      for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      document.getElementById("passResult").innerText = pass;
+    }
 
-  function toggleTheme() {
-    document.body.classList.toggle('dark');
-  }
+    function generateQR() {
+      const qrText = document.getElementById("qrInput").value;
+      document.getElementById("qrcode").innerHTML = "";
+      QRCode.toCanvas(document.getElementById("qrcode"), qrText, function (error) {
+        if (error) console.error(error);
+      });
+    }
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  window.addEventListener('scroll', () => {
-    document.querySelector('.back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-</script>
+    function getYTThumb() {
+      const url = document.getElementById("ytInput").value;
+      let videoId = "";
+      if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
+      else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1];
+      if (videoId) {
+        document.getElementById("ytResult").innerHTML =
+          `<img src='https://img.youtube.com/vi/${videoId}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
+      } else {
+        document.getElementById("ytResult").innerText = "Invalid YouTube URL";
+      }
+    }
+  </script>
+</body>
+</html>
