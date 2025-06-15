@@ -171,4 +171,99 @@
   </style>
 </head>
 <body>
-<!-- Tools + Script + Footer will be injected here -->
+<header>
+  <img src="https://cdn-icons-png.flaticon.com/512/9445/9445126.png" alt="ToolX Logo">
+  <h1>ToolX Hub</h1>
+  <p>Free Online Tools: Fancy Text, Insta DP Viewer, Password Generator</p>
+  <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+</header>
+
+<nav>
+  <a href="#fancy-text-generator">Fancy Text</a>
+  <a href="#instagram-dp-viewer">Insta DP</a>
+  <a href="#password-generator">Password</a>
+</nav>
+
+<section class="section" id="fancy-text-generator">
+  <h2>📝 Fancy Text Generator</h2>
+  <input type="text" id="fancyInput" placeholder="Enter your text...">
+  <button onclick="generateFancyText()">Generate</button>
+  <div id="fancyOutput" class="output"></div>
+  <button class="copy-btn" onclick="copyOutput('fancyOutput')">📋 Copy Fancy Text</button>
+</section>
+
+<section class="section" id="instagram-dp-viewer">
+  <h2>📸 Instagram DP Viewer</h2>
+  <input type="text" id="instaUser" placeholder="Enter Instagram username">
+  <button onclick="viewInstaDP()">View DP</button>
+  <div id="instaDPResult" class="output"></div>
+</section>
+
+<section class="section" id="password-generator">
+  <h2>🔐 Password Generator</h2>
+  <input type="number" id="passLength" placeholder="Enter length (e.g. 12)">
+  <button onclick="generatePassword()">Generate Password</button>
+  <div id="passResult" class="output"></div>
+  <button class="copy-btn" onclick="copyOutput('passResult')">📋 Copy Password</button>
+</section>
+
+<div class="share-icons">
+  <a href="https://wa.me/?text=Check%20this%20cool%20tool%20site:%20https://instadown999.github.io/toolxhub/" target="_blank" title="Share on WhatsApp">🟢</a>
+  <a href="https://www.instagram.com/" target="_blank" title="Instagram">📸</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://instadown999.github.io/toolxhub/" target="_blank" title="Share on Facebook">🔵</a>
+  <a href="https://t.me/share/url?url=https://instadown999.github.io/toolxhub/&text=Free%20Online%20Tools" target="_blank" title="Share on Telegram">✈️</a>
+</div>
+
+<button class="back-to-top" onclick="scrollToTop()">⬆️</button>
+
+<footer>
+  <p>&copy; 2025 ToolX Hub. All rights reserved. Designed for creators and developers.</p>
+</footer>
+
+<script>
+  function generateFancyText() {
+    const text = document.getElementById('fancyInput').value;
+    const fancy = text.split('').map(char => {
+      const code = char.charCodeAt(0);
+      return (code >= 65 && code <= 90) ? String.fromCharCode(code + 119951 - 65) :
+             (code >= 97 && code <= 122) ? String.fromCharCode(code + 119919 - 97) : char;
+    }).join('');
+    document.getElementById('fancyOutput').innerText = fancy || '🔎 Please enter text';
+  }
+
+  function viewInstaDP() {
+    const user = document.getElementById('instaUser').value.trim();
+    if (user) {
+      document.getElementById('instaDPResult').innerHTML = `Try this link: <a href="https://www.instadp.io/fullsize/${user}" target="_blank">View Profile Picture in HD</a>`;
+    } else {
+      document.getElementById('instaDPResult').innerText = '❌ Please enter a username';
+    }
+  }
+
+  function generatePassword() {
+    const length = parseInt(document.getElementById('passLength').value);
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    document.getElementById('passResult').innerText = password || '❌ Enter a valid length';
+  }
+
+  function copyOutput(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => alert('✅ Copied to clipboard!'));
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('.back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+</script>
