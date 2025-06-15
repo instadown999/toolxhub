@@ -188,21 +188,38 @@
     }
 
     function generateQR() {
-      const qrText = document.getElementById("qrInput").value;
-      document.getElementById("qrcode").innerHTML = "";
-      QRCode.toCanvas(document.getElementById("qrcode"), qrText, function (error) {
-        if (error) console.error(error);
-      });
+  const qrText = document.getElementById("qrInput").value;
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
+  const canvas = document.createElement("canvas");
+  qrContainer.appendChild(canvas);
+  QRCode.toCanvas(canvas, qrText, function (error) {
+    if (error) console.error(error);
+  });
+});
     }
 
     function getYTThumb() {
-      const url = document.getElementById("ytInput").value;
-      let videoId = "";
-      if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
-      else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1];
-      if (videoId) {
-        document.getElementById("ytResult").innerHTML =
-          `<img src='https://img.youtube.com/vi/${videoId}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
+  const url = document.getElementById("ytInput").value.trim();
+  let videoId = '';
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.hostname.includes('youtu.be')) {
+      videoId = parsedUrl.pathname.slice(1);
+    } else {
+      videoId = parsedUrl.searchParams.get('v');
+    }
+  } catch {
+    document.getElementById("ytResult").innerText = "Invalid YouTube URL";
+    return;
+  }
+  if (videoId) {
+    document.getElementById("ytResult").innerHTML =
+      `<img src='https://img.youtube.com/vi/${videoId}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
+  } else {
+    document.getElementById("ytResult").innerText = "Invalid YouTube URL";
+  }
+}/maxresdefault.jpg' alt='Thumbnail' style='width:100%; max-width:500px;'>`;
       } else {
         document.getElementById("ytResult").innerText = "Invalid YouTube URL";
       }
